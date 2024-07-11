@@ -1,16 +1,22 @@
 'use client'
 
 import { callSquad } from '@/lib/callSquad'
-import { PhoneIcon } from '@heroicons/react/20/solid'
+import { CheckCircleIcon, PhoneIcon } from '@heroicons/react/20/solid'
 import { useMutation } from '@tanstack/react-query'
+import clsx from 'clsx'
+import { useState } from 'react'
 
 export function PhoneInput() {
   const { mutate, isPending, error, data, isFetching } = useMutation({
     queryFn: callSquad,
   })
 
+  const [clicked, setClicked] = useState()
+
   const handleSubmit = (event) => {
     event.preventDefault()
+    console.log('Submitting event.')
+    setClicked(true)
     callSquad(event.target.phone.value)
   }
 
@@ -38,10 +44,16 @@ export function PhoneInput() {
       </div>
       <button
         type="submit"
-        disabled={isPending}
-        className="w-full rounded-md bg-sky-700 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-sky-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+        disabled={clicked}
+        className={clsx("duration-300 w-full rounded-md  px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 ", !clicked ? "bg-sky-700 hover:bg-sky-500" : "bg-emerald-600 hover:bg-emerald-500")}
       >
-        Call
+        <div>
+          {clicked ? (
+            <CheckCircleIcon className="h-6 w-6 mx-auto" />
+          ) : (
+            <p>Call</p>
+          )}
+        </div>
       </button>
     </form>
   )
