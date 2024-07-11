@@ -59,7 +59,7 @@ export function Logo({
     /> */}
       </svg>
       <p className="ml-3 hidden font-display text-xl font-semibold text-neutral-950 sm:block">
-        The Joint
+        Smoothie King
       </p>
     </div>
   )

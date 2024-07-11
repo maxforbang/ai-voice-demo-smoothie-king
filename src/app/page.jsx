@@ -166,7 +166,7 @@ function Services() {
 }
 
 export const metadata = {
-  description: 'The Joint Voice AI Demo.',
+  description: 'Smoothie King Voice AI Demo.',
 }
 
 export default async function Home() {
